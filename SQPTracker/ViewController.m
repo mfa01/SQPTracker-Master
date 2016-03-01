@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "ConfigVars.h"
 @interface ViewController ()
 
 @end
