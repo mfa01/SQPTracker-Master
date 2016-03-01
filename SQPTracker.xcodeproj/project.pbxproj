@@ -58,6 +58,9 @@
 		3A7077C71C86130D002D2F1E /* SQPTracker */ = {
 			isa = PBXGroup;
 			children = (
+				3A7077E21C86296B002D2F1E /* Views */,
+				3A7077DF1C862947002D2F1E /* Controllers */,
+				3A7077E01C862947002D2F1E /* Models */,
 				3A7077CB1C86130D002D2F1E /* AppDelegate.h */,
 				3A7077CC1C86130D002D2F1E /* AppDelegate.m */,
 				3A7077CE1C86130D002D2F1E /* ViewController.h */,
@@ -77,6 +80,27 @@
 				3A7077C91C86130D002D2F1E /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A7077DF1C862947002D2F1E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3A7077E01C862947002D2F1E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3A7077E21C86296B002D2F1E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +289,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xxx.SQPTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -276,6 +301,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xxx.SQPTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
