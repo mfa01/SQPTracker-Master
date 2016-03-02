@@ -7,15 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A4C67ED1C8663CD0073C041 /* ProductsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C67EC1C8663CD0073C041 /* ProductsController.m */; };
+		3A4C67F01C8663F60073C041 /* ProductDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4C67EF1C8663F60073C041 /* ProductDetailsController.m */; };
 		3A7077CA1C86130D002D2F1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077C91C86130D002D2F1E /* main.m */; };
 		3A7077CD1C86130D002D2F1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077CC1C86130D002D2F1E /* AppDelegate.m */; };
 		3A7077D01C86130D002D2F1E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077CF1C86130D002D2F1E /* ViewController.m */; };
 		3A7077D31C86130D002D2F1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7077D11C86130D002D2F1E /* Main.storyboard */; };
 		3A7077D51C86130E002D2F1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A7077D41C86130E002D2F1E /* Assets.xcassets */; };
 		3A7077D81C86130E002D2F1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7077D61C86130E002D2F1E /* LaunchScreen.storyboard */; };
+		3A7077E61C862FB3002D2F1E /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077E51C862FB3002D2F1E /* LoginController.m */; };
+		3A7077E91C8633E2002D2F1E /* ProductsTypesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077E81C8633E2002D2F1E /* ProductsTypesController.m */; };
+		3A7077ED1C863534002D2F1E /* ProductsTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077EC1C863534002D2F1E /* ProductsTypeCell.m */; };
+		3A7077F01C8638A5002D2F1E /* ProductTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077EF1C8638A5002D2F1E /* ProductTypeModel.m */; };
+		3A7077F41C863B9E002D2F1E /* WebHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7077F31C863B9E002D2F1E /* WebHelper.m */; };
+		65EE4242C31C88590CF2ACE6 /* libPods-SQPTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 643221B6F552DCF4F29FAFE7 /* libPods-SQPTracker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A4C67EB1C8663CD0073C041 /* ProductsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductsController.h; sourceTree = "<group>"; };
+		3A4C67EC1C8663CD0073C041 /* ProductsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductsController.m; sourceTree = "<group>"; };
+		3A4C67EE1C8663F60073C041 /* ProductDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailsController.h; sourceTree = "<group>"; };
+		3A4C67EF1C8663F60073C041 /* ProductDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailsController.m; sourceTree = "<group>"; };
 		3A7077C51C86130D002D2F1E /* SQPTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SQPTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7077C91C86130D002D2F1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A7077CB1C86130D002D2F1E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -27,6 +39,19 @@
 		3A7077D71C86130E002D2F1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A7077D91C86130E002D2F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A7077E31C862D7C002D2F1E /* ConfigVars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfigVars.h; sourceTree = "<group>"; };
+		3A7077E41C862FB3002D2F1E /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		3A7077E51C862FB3002D2F1E /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		3A7077E71C8633E2002D2F1E /* ProductsTypesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductsTypesController.h; sourceTree = "<group>"; };
+		3A7077E81C8633E2002D2F1E /* ProductsTypesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductsTypesController.m; sourceTree = "<group>"; };
+		3A7077EB1C863534002D2F1E /* ProductsTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductsTypeCell.h; sourceTree = "<group>"; };
+		3A7077EC1C863534002D2F1E /* ProductsTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductsTypeCell.m; sourceTree = "<group>"; };
+		3A7077EE1C8638A5002D2F1E /* ProductTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTypeModel.h; sourceTree = "<group>"; };
+		3A7077EF1C8638A5002D2F1E /* ProductTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTypeModel.m; sourceTree = "<group>"; };
+		3A7077F21C863B9E002D2F1E /* WebHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebHelper.h; sourceTree = "<group>"; };
+		3A7077F31C863B9E002D2F1E /* WebHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebHelper.m; sourceTree = "<group>"; };
+		643221B6F552DCF4F29FAFE7 /* libPods-SQPTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SQPTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC4F2060A46542A02C83E520 /* Pods-SQPTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SQPTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-SQPTracker/Pods-SQPTracker.release.xcconfig"; sourceTree = "<group>"; };
+		FC0FD976AE5227074EC50498 /* Pods-SQPTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SQPTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SQPTracker/Pods-SQPTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65EE4242C31C88590CF2ACE6 /* libPods-SQPTracker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +71,8 @@
 			children = (
 				3A7077C71C86130D002D2F1E /* SQPTracker */,
 				3A7077C61C86130D002D2F1E /* Products */,
+				FF0AB2F0F4592AFD8DE73312 /* Pods */,
+				C8983C37B6E2D1579B19E978 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +87,8 @@
 		3A7077C71C86130D002D2F1E /* SQPTracker */ = {
 			isa = PBXGroup;
 			children = (
+				3A7077F11C863B8B002D2F1E /* Helpers */,
+				3A7077EA1C86351B002D2F1E /* CustomCells */,
 				3A7077E21C86296B002D2F1E /* Views */,
 				3A7077DF1C862947002D2F1E /* Controllers */,
 				3A7077E01C862947002D2F1E /* Models */,
@@ -87,6 +117,14 @@
 		3A7077DF1C862947002D2F1E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3A7077E41C862FB3002D2F1E /* LoginController.h */,
+				3A7077E51C862FB3002D2F1E /* LoginController.m */,
+				3A4C67EB1C8663CD0073C041 /* ProductsController.h */,
+				3A4C67EC1C8663CD0073C041 /* ProductsController.m */,
+				3A7077E71C8633E2002D2F1E /* ProductsTypesController.h */,
+				3A7077E81C8633E2002D2F1E /* ProductsTypesController.m */,
+				3A4C67EE1C8663F60073C041 /* ProductDetailsController.h */,
+				3A4C67EF1C8663F60073C041 /* ProductDetailsController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -94,6 +132,8 @@
 		3A7077E01C862947002D2F1E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A7077EE1C8638A5002D2F1E /* ProductTypeModel.h */,
+				3A7077EF1C8638A5002D2F1E /* ProductTypeModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -105,6 +145,41 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		3A7077EA1C86351B002D2F1E /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				3A7077EB1C863534002D2F1E /* ProductsTypeCell.h */,
+				3A7077EC1C863534002D2F1E /* ProductsTypeCell.m */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		3A7077F11C863B8B002D2F1E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A7077F21C863B9E002D2F1E /* WebHelper.h */,
+				3A7077F31C863B9E002D2F1E /* WebHelper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C8983C37B6E2D1579B19E978 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				643221B6F552DCF4F29FAFE7 /* libPods-SQPTracker.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF0AB2F0F4592AFD8DE73312 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FC0FD976AE5227074EC50498 /* Pods-SQPTracker.debug.xcconfig */,
+				EC4F2060A46542A02C83E520 /* Pods-SQPTracker.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,9 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A7077DC1C86130E002D2F1E /* Build configuration list for PBXNativeTarget "SQPTracker" */;
 			buildPhases = (
+				E109AEA958EC092A60F92D8F /* Check Pods Manifest.lock */,
 				3A7077C11C86130D002D2F1E /* Sources */,
 				3A7077C21C86130D002D2F1E /* Frameworks */,
 				3A7077C31C86130D002D2F1E /* Resources */,
+				9F5CB93A60DBF8ECEA39051B /* Embed Pods Frameworks */,
+				89365DFA1C67A96D39AB233F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,14 +248,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		89365DFA1C67A96D39AB233F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SQPTracker/Pods-SQPTracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F5CB93A60DBF8ECEA39051B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SQPTracker/Pods-SQPTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E109AEA958EC092A60F92D8F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3A7077C11C86130D002D2F1E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4C67F01C8663F60073C041 /* ProductDetailsController.m in Sources */,
 				3A7077D01C86130D002D2F1E /* ViewController.m in Sources */,
+				3A7077ED1C863534002D2F1E /* ProductsTypeCell.m in Sources */,
+				3A7077E61C862FB3002D2F1E /* LoginController.m in Sources */,
 				3A7077CD1C86130D002D2F1E /* AppDelegate.m in Sources */,
+				3A7077F41C863B9E002D2F1E /* WebHelper.m in Sources */,
+				3A7077E91C8633E2002D2F1E /* ProductsTypesController.m in Sources */,
 				3A7077CA1C86130D002D2F1E /* main.m in Sources */,
+				3A7077F01C8638A5002D2F1E /* ProductTypeModel.m in Sources */,
+				3A4C67ED1C8663CD0073C041 /* ProductsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +418,7 @@
 		};
 		3A7077DD1C86130E002D2F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC0FD976AE5227074EC50498 /* Pods-SQPTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SQPTracker/Info.plist;
@@ -297,6 +431,7 @@
 		};
 		3A7077DE1C86130E002D2F1E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC4F2060A46542A02C83E520 /* Pods-SQPTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SQPTracker/Info.plist;
@@ -326,6 +461,7 @@
 				3A7077DE1C86130E002D2F1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

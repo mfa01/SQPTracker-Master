@@ -16,9 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self performSelector:@selector(showLoginView) withObject:nil afterDelay:Logo_Seconds];
     // Do any additional setup after loading the view, typically from a nib.
 }
-
+-(void)showLoginView
+{
+    [self performSegueWithIdentifier:@"GoToLoginController" sender:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
