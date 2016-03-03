@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface ProductsTypesController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     int page;

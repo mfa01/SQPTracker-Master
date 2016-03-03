@@ -10,12 +10,14 @@
 #import "WebHelper.h"
 #import "ProductTypeModel.h"
 #import "ProductsTypeCell.h"
+#import "StoreDB.h"
 @implementation ProductsTypesController
 -(void)viewDidLoad
 {
     page=1;
     productsTypes=[[NSMutableArray alloc] init];
     selectedProductsIDs=[[NSMutableArray alloc] init];
+    [selectedProductsIDs addObjectsFromArray:[StoreDB getUserChoices]];
     [self getMoreProductsTypes];
 }
 -(void)getMoreProductsTypes
@@ -30,6 +32,8 @@
     }];
 }
 - (IBAction)btnGo:(id)sender {
+    [StoreDB saveUserChoices:selectedProductsIDs];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -67,13 +71,6 @@
         [self getMoreProductsTypes];
     }
 }
-
-//- (void)styleSelectionFor:(ProductTypeCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-//    BOOL selected = [[typesTableView indexPathsForSelectedRows] containsObject:indexPath];
-//    [cell.typeLabel setTextColor:selected?[UIColor whiteColor]:[self.stylingDetails themeColor]];
-//    [cell.selectionBackView setBackgroundColor:selected?[self.stylingDetails themeBlueColor]:[self.stylingDetails themeGrayColor]];
-//    [cell.selectionImageView setHidden:!selected];
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return productsTypes.count;

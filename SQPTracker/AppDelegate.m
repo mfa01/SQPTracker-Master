@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "WebHelper.h"
+#import "User.h"
+#import "ConfigVars.h"
 @interface AppDelegate ()
 
 @end
@@ -19,6 +21,60 @@
     // Override point for customization after application launch.
     return YES;
 }
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self parseDeepLink:url];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    return [self parseDeepLink:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self parseDeepLink:url];
+}
+- (BOOL)parseDeepLink:(NSURL *)url {
+    @try {
+        
+        if (!url)
+            return NO;
+        
+        NSLog(@"url recieved: %@", url);
+        NSLog(@"query string: %@", [url query]);
+        NSLog(@"host: %@", [url host]);
+        NSLog(@"url path: %@", [url path]);
+        
+        NSDictionary *dict = [self parseQueryString:[url query]];
+        [WebHelper getAccesTokenWithCode:[dict valueForKey:@"code"] AndCompletionHandler:^(id user) {
+            [[NSUserDefaults standardUserDefaults]setObject:[(User*)user user_access_token] forKey:Keys_UserAccessToken];
+            [[NSUserDefaults standardUserDefaults]setObject:[(User*)user user_id] forKey:Keys_UserID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } FaildCompletionHandler:^(NSString *error) {
+            
+        }];
+        // [[singlton apiHelper] userAuthorized:[dict valueForKey:@"code"]];
+        
+    } @catch (NSException *exception) {
+        // DDLogVerbose(@"Deep Link ::::: URL Parsing Exception ::::: %@", [exception debugDescription]);
+        return  NO;
+    }
+    
+    return YES;
+}
+
+- (NSDictionary *)parseQueryString:(NSString *)query {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    
+    for (NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dict setObject:val forKey:key];
+    }
+    return dict;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

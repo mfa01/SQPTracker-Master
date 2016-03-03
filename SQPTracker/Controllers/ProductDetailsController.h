@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ProductDetailsController : UIViewController
-
+#import "ProductModel.h"
+@interface ProductDetailsController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    NSArray* offersArray;
+}
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UIImageView *ivProductImage;
+@property (weak, nonatomic) IBOutlet UILabel *lblProductPrice;
+@property (weak, nonatomic) IBOutlet UIButton *btnAddToFavorite;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(weak,nonatomic)ProductModel* product;
 @end

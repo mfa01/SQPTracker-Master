@@ -16,6 +16,7 @@
     
 }
 - (IBAction)connectToSouqAccount:(id)sender {
+    [WebHelper authorizeUser];
 }
 - (IBAction)guest:(id)sender {
     

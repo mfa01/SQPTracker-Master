@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProductsController : UIViewController
+@interface ProductsController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate>
+{
+    int page;
+    NSMutableArray* products;
+    int oldTabBarItem;
+    BOOL searching;
+    NSArray*searchingResults;
+}
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
