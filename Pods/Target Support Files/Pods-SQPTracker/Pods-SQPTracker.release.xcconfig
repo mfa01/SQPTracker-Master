@@ -1,0 +1,5 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/EGODatabase" "${PODS_ROOT}/Headers/Public/JSONModel" "${PODS_ROOT}/Headers/Public/NSDate+TimeAgo" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/STHTTPRequest"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/EGODatabase" -isystem "${PODS_ROOT}/Headers/Public/JSONModel" -isystem "${PODS_ROOT}/Headers/Public/NSDate+TimeAgo" -isystem "${PODS_ROOT}/Headers/Public/SDWebImage" -isystem "${PODS_ROOT}/Headers/Public/STHTTPRequest"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"EGODatabase" -l"JSONModel" -l"NSDate+TimeAgo" -l"SDWebImage" -l"STHTTPRequest" -l"sqlite3" -framework "ImageIO"
+PODS_ROOT = ${SRCROOT}/Pods
