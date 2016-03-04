@@ -11,7 +11,7 @@
 #import "WebHelper.h"
 #import "ProductModel.h"
 #import "StoreDB.h"
-#import "ProductCell.h"
+#import "CartModel.h"
 #import "ProductDetailsController.h"
 @implementation ProductsController
 -(void)viewDidLoad
@@ -19,18 +19,57 @@
     page=1;
     products=[[NSMutableArray alloc]init];
     
+
+    if([StoreDB getUserChoices].count==0)
+    {
+        //show setting for the first time
+        // to let user add his choices
+        [self showProductsTypes:nil];
+    }
+    
+    //get user favorite items from stored DB
+    favoritesArray=[[NSMutableArray alloc] initWithArray:[StoreDB getUserFavorites]];
+    
+    //download user cart.. also set there cart id if authinticaed
+    if([WebHelper getUserAccessToken])
+        [self getUserCart];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self getMoreProducts];
+    //refresh active tab content
+    if(!isInFavorites&&!isInCart)
+    {
+        [self getMoreProducts];
+    }
+    else if(isInFavorites)
+    {
+        [self favoritesTabSelected];
+    }
+    else if(isInCart)
+    {
+        [self cartTabSelected];
+    }
+}
+-(void)getUserCart
+{
+    [WebHelper getUserCartWithCompletionHandler:^(NSArray* cart) {
+        
+        cartArray=[[NSMutableArray alloc]initWithArray:cart];
+        
+        
+    } FaildCompletionHandler:^(NSString *error) {
+        
+    }];
 }
 -(void)getMoreProducts
 {
-
     [WebHelper getProductsWithPage:page AndTypes:[StoreDB getUserChoices] AndCompletionHandler:^(NSArray *items) {
-        page++;
-        [products addObjectsFromArray:items];
-        [_collectionView reloadData];
+        if(!isInFavorites&&!isInCart)
+        {
+            page++;
+            [products addObjectsFromArray:items];
+            [_collectionView reloadData];
+        }
         
     } FaildCompletionHandler:^(NSString *error) {
         
@@ -44,19 +83,41 @@
         oldTabBarItem=(int)item.tag;
         if(item.tag==0)//products
         {
-            [products removeAllObjects];
-            [_collectionView reloadData];
-            page=1;
-            [self getMoreProducts];
+            [self productsTabSelected];
         }
         else if(item.tag==1)//favories
         {
-//            [products removeAllObjects];
-//            NSMutableArray* productIdsArray=[StoreDB getUserFavorites];
-//            [_collectionView reloadData];
-
+            [self favoritesTabSelected];
+        }
+        else if(item.tag==2)//cart
+        {
+            [self cartTabSelected];
         }
     }
+}
+-(void)cartTabSelected
+{
+    isInCart=true;
+    [products removeAllObjects];
+    [products addObjectsFromArray:cartArray];
+    [_collectionView reloadData];
+}
+-(void)favoritesTabSelected
+{
+    isInFavorites=true;
+    isInCart=false;
+    [products removeAllObjects];
+    [products addObjectsFromArray:[StoreDB getUserFavorites]];
+    [_collectionView reloadData];
+}
+-(void)productsTabSelected
+{
+    isInFavorites=false;
+    isInCart=false;
+    [products removeAllObjects];
+    [_collectionView reloadData];
+    page=1;
+    [self getMoreProducts];
 }
 - (IBAction)showProductsTypes:(id)sender {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -73,6 +134,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     NSLog(@"search text %@",searchText);
+    //search in current downloaded products list
     NSPredicate *resultPredicate =[NSPredicate predicateWithFormat:@"SELF.product_label contains[c] %@",searchText];
     searchingResults = [products filteredArrayUsingPredicate:resultPredicate];
     if(searchText.length==0)searchingResults=products;
@@ -111,7 +173,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     ProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ProductCell" forIndexPath:indexPath];
     ProductModel *product;
     if(searching)
@@ -121,14 +182,75 @@
     else
     {
         product=products[indexPath.row];
+    }
+    [cell setUpWithItem:product AndIsFavorited:[self checkIfProductInFavorites:product.product_id]];
+    
+    //delegate needed because of product favorite button click action
+    cell.delegate=self;
+    return cell;
+}
+-(BOOL)checkIfProductInFavorites:(NSString*)productID
+{
+    for (int i=0; i<favoritesArray.count; i++) {
+        ProductModel*item=favoritesArray[i];
+//        if ([productID isKindOfClass:[NSString class]]) {
+            if([item.product_id isEqualToString:productID])
+            {
+                return YES;
+            }
+//        }
+//        else
+//        {
+//            if([item.product_id longLongValue]== [productID longLongValue])
+//            {
+//                return YES;
+//            }
+//        }
         
     }
-    [cell setUpWithItem:product];
-    return cell;
+    return NO;
+}
+
+-(void)addToFavoritesWithProduct:(ProductModel *)product
+{
+    //if product already in favorites list remove it else add it
+    if([self checkIfProductInFavorites:product.product_id])
+    {
+        [StoreDB removeFromFavorites:product];
+        ProductModel*item;
+
+        if(isInFavorites)
+        {
+            for (int i=0; i<favoritesArray.count; i++) {
+                item=favoritesArray[i];
+                
+                if([item.product_id isEqualToString:product.product_id])
+                {
+                    [favoritesArray removeObjectAtIndex:i];
+                    break;
+                }
+            }
+        }
+    }
+    else
+    {
+        [StoreDB addToFavorites:product];
+        [favoritesArray addObject:product];
+    }
+
+    if(isInFavorites)
+    {
+        //[self favoritesTabSelected];
+        [products removeAllObjects];
+        [products addObjectsFromArray:favoritesArray];
+        [_collectionView reloadData];
+    }
 }
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(searching)return;
+    if(searching||isInFavorites||isInCart)return;
+    
+    //lazy loading for products when user reach end of products list
     if (indexPath.row == products.count-2) {
         [self getMoreProducts];
     }

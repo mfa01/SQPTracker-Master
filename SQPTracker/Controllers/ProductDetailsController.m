@@ -10,6 +10,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WebHelper.h"
 #import "OfferPriceCell.h"
+#import "StoreDB.h"
 @implementation ProductDetailsController
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -17,8 +18,58 @@
     [_ivProductImage sd_setImageWithURL:[_product getImageForProductsDetails]];
     _lblProductPrice.text=[_product getPriceWithCurrency];
     [self getOffers];
+    [self checkFavorite];
     
+}
+- (IBAction)addToCart:(id)sender {
+    if([WebHelper getUserAccessToken])
+    {
+        [WebHelper addProductToUserCartId:[WebHelper getCartID] AndProductId:_product.product_offer_id AndCompletionHandler:^(bool success) {
+            NSLog(@"%u",success);
+            [self showMessage:@"Cong..Product added to the Cart"];
+            
+        } FaildCompletionHandler:^(NSString *error) {
+            NSLog(@"%@",error);
+        }];
+    }
+    else
+    {
+        [self showMessage:@"Please login to add products to cart"];
+    }
+}
+-(void)showMessage:(NSString*)msg
+{
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* ok = [UIAlertAction
+                               actionWithTitle:@"Ok"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   
+                               }];
     
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+-(void)checkFavorite
+{
+    if([StoreDB getItemFromFavoritesWithID:_product.product_id])
+        [_btnFavorites setSelected:YES];
+    else [_btnFavorites setSelected:NO];
+    
+    isFavorite=_btnFavorites.isSelected;
+}
+- (IBAction)addToFavorites:(id)sender {
+    if(isFavorite)
+    {
+        [StoreDB removeFromFavorites:_product];
+        [_btnFavorites setSelected:NO];
+    }
+    else
+    {
+        [StoreDB addToFavorites:_product];
+        [_btnFavorites setSelected:YES];
+    }
 }
 -(void)getOffers
 {

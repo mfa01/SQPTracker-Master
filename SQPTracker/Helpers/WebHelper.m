@@ -13,6 +13,7 @@
 #import "ProductModel.h"
 #import "ProductOfferModel.h"
 #import "User.h"
+#import "CartModel.h"
 @implementation WebHelper
 +(void)getProductsTypesWithPage:(int)page AndCompletionHandler:(void (^)(NSArray*))completionHandler FaildCompletionHandler:(void (^)(NSString*))faildCompletionHandler
 {
@@ -192,6 +193,7 @@
         {
             NSDictionary* dic=[json valueForKey:@"data"] ;
             User* user = [[User alloc] initWithDictionary:dic error:&err];
+            [WebHelper saveUserAccessToken:user.user_access_token AndUserID:user.user_id];
             completionHandler(user);
         }
     };
@@ -201,4 +203,143 @@
     };
     [r startAsynchronous];
 }
++(void)saveUserAccessToken:(NSString*)token AndUserID:(NSString*)userId
+{
+    [[NSUserDefaults standardUserDefaults]setObject:token forKey:Keys_UserAccessToken];
+    [[NSUserDefaults standardUserDefaults]setObject:userId forKey:Keys_UserID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++(NSString*)getUserAccessToken
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:Keys_UserAccessToken];
+}
++(NSString*)getUserID
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:Keys_UserID];
+}
+
+
++ (NSDictionary *)parseQueryString:(NSString *)query {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    
+    for (NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        
+        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dict setObject:val forKey:key];
+    }
+    return dict;
+}
+
+
+
++(void)getUserCartWithCompletionHandler:(void (^)(id))completionHandler FaildCompletionHandler:(void (^)(NSString*))faildCompletionHandler
+{
+    STHTTPRequest *r = [STHTTPRequest requestWithURLString:[NSString stringWithFormat:@"%@/%@/%@",WEB_MAIN_URL,WEB_Version,WEB_CARTS]];
+    r.GETDictionary=@{
+                       @"language":@"en",
+                       @"client_id":App_ID,
+                       @"client_secret":Client_Secret,
+                       @"country":@"ae",
+                       @"customer_id":[WebHelper getUserID],
+                       @"app_id":App_ID,
+                       @"app_secret":Client_Secret,
+                       @"access_token":[WebHelper getUserAccessToken]
+                       };
+    r.completionBlock = ^(NSDictionary *headers, NSString *body) {
+        NSError* err = nil;
+        NSData *objectData = [body dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
+                                                             options:NSJSONReadingMutableContainers
+                                                               error:&err];
+        if(err)
+        {
+            faildCompletionHandler(err.localizedDescription);
+        }
+        else
+        {
+            NSDictionary* dic=[json valueForKey:@"data"] ;
+            CartModel* cart = [[CartModel alloc] initWithDictionary:dic error:&err];
+            [[NSUserDefaults standardUserDefaults]setObject:cart.cart_id forKey:Keys_UserCartID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
+            NSMutableArray* items=[[NSMutableArray alloc]init];
+            NSArray* productsArr=(NSArray*)cart.cart_products;
+            for (int i=0; i<productsArr.count; i++) {
+
+                ProductModel* product = [[ProductModel alloc]init];
+                long long longID=[[productsArr[i] objectForKey:@"id"] longLongValue];
+                NSString*str=[[NSNumber numberWithLongLong:longID] stringValue];
+                product.product_id=str;
+                product.product_label=[productsArr[i] objectForKey:@"label"];
+                product.product_images=[[productsArr[i] objectForKey:@"selected_offer"] objectForKey:@"product_images"];
+                product.product_currency=[productsArr[i] objectForKey:@"currency"];
+                product.product_offer_id=[[productsArr[i] objectForKey:@"selected_offer"] objectForKey:@"id"];
+                
+                if(err)faildCompletionHandler(err.localizedDescription);
+                else [items addObject:product];
+            }
+            
+            completionHandler(items);
+        }
+    };
+    //
+    r.errorBlock = ^(NSError *error) {
+        faildCompletionHandler(error.localizedDescription);
+    };
+    [r startAsynchronous];
+}
++(NSString*)getCartID
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:Keys_UserCartID];
+}
++(void)addProductToUserCartId:(NSString*)cartId AndProductId:(NSString*)productId AndCompletionHandler:(void (^)(bool))completionHandler FaildCompletionHandler:(void (^)(NSString*))faildCompletionHandler
+{
+    STHTTPRequest *r = [STHTTPRequest requestWithURLString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@",WEB_MAIN_URL,WEB_Version,WEB_CARTS,cartId,WEB_OFFERS]];
+    
+    r.POSTDictionary=@{
+                      @"language":@"en",
+                      @"client_id":App_ID,
+                      @"client_secret":Client_Secret,
+                      @"country":@"ae",
+                      @"customer_id":[WebHelper getUserID],
+                      @"app_id":App_ID,
+                      @"format":@"json",
+                      @"offer_id":productId,
+                      //@"cart_id":cartId,48127161
+                      @"app_secret":Client_Secret,
+                      @"quantity":@(1),
+                      @"access_token":[WebHelper getUserAccessToken]
+                      };
+    r.completionBlock = ^(NSDictionary *headers, NSString *body) {
+        //NSLog(body);
+        NSError* err = nil;
+        NSData *objectData = [body dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
+                                                             options:NSJSONReadingMutableContainers
+                                                               error:&err];
+        if(err)
+        {
+            faildCompletionHandler(err.localizedDescription);
+        }
+        else
+        {
+            NSDictionary* dic=[json valueForKey:@"data"] ;
+            if([[dic objectForKey:@"success"] boolValue])
+            {
+                completionHandler([[dic objectForKey:@"success"] boolValue]);
+            }
+        }
+    };
+    //
+    r.errorBlock = ^(NSError *error) {
+        faildCompletionHandler(error.localizedDescription);
+    };
+    [r startAsynchronous];
+}
+
 @end

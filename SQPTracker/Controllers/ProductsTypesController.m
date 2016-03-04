@@ -32,6 +32,7 @@
     }];
 }
 - (IBAction)btnGo:(id)sender {
+    //save user choices and go to products to load prodcuts there
     [StoreDB saveUserChoices:selectedProductsIDs];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -49,7 +50,6 @@
     static NSString *CellId = @"ProductsTypeCell";
     ProductsTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
     [cell setupCellWithProductType:item];
-    
     return cell;
 }
 
@@ -67,6 +67,8 @@
     {
         [cell setCellSelected:NO];
     }
+    
+    //lazy loading for types when reach end of list
     if (indexPath.row == productsTypes.count-2) {
         [self getMoreProductsTypes];
     }

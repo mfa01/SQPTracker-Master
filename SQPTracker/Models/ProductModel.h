@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSDictionary *product_images;
 @property (nonatomic, assign) NSInteger product_offer_price;
 @property (nonatomic, strong) NSString *product_currency;
+@property (nonatomic, strong) NSString *product_offer_id;
 
 -(NSURL*)getImageForProductsDashboard;
 -(NSString*)getPriceWithCurrency;

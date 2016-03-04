@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductModel.h"
+@protocol ProductCellDelegate<NSObject>
+@required
+- (void) addToFavoritesWithProduct:(ProductModel*)product;
+@end
+
 @interface ProductCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblImageName;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
--(void)setUpWithItem:(ProductModel*)product;
+@property (weak, nonatomic) IBOutlet UIButton *btnAddToFavorite;
+@property (weak, nonatomic) ProductModel *product;
+-(void)setUpWithItem:(ProductModel*)product AndIsFavorited:(BOOL)inFavorites;
+@property (nonatomic,assign)  id <ProductCellDelegate> delegate;
 @end

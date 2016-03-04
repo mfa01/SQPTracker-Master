@@ -81,7 +81,7 @@
                                 </state>
                                 <connections>
                                     <action selector="guest:" destination="sfw-cC-SH0" eventType="touchUpInside" id="wcT-aD-ocb"/>
-                                    <segue destination="2MJ-bg-7zR" kind="show" id="oBR-Kg-wWw"/>
+                                    <segue destination="2MJ-bg-7zR" kind="show" identifier="GoToProducts" id="oBR-Kg-wWw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -233,6 +233,7 @@
                                 <items>
                                     <tabBarItem title="Products" image="DeactiveList" id="Kok-2e-R63"/>
                                     <tabBarItem tag="1" systemItem="favorites" id="bGc-dF-PaE"/>
+                                    <tabBarItem tag="2" title="Cart" image="Cart" id="guL-Tc-9kN"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="NMO-7d-RMP" id="o5V-KT-5ov"/>
@@ -285,6 +286,10 @@
                                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJY-R8-wNt">
                                                             <rect key="frame" x="53" y="6" width="86" height="25"/>
                                                             <state key="normal" image="ActiveFavorite"/>
+                                                            <state key="selected" image="DeactiveFavorite"/>
+                                                            <connections>
+                                                                <action selector="addToFavorite:" destination="UOR-yi-nmH" eventType="touchUpInside" id="rVc-fE-X53"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -338,6 +343,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
+                                            <outlet property="btnAddToFavorite" destination="bJY-R8-wNt" id="mja-eT-9a3"/>
                                             <outlet property="imageView" destination="Xhh-Zo-9ld" id="2Uc-6b-ST4"/>
                                             <outlet property="lblImageName" destination="eSa-hJ-klD" id="fAF-Om-iDm"/>
                                         </connections>
@@ -412,7 +418,7 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$89.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0Z-hb-stD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0Z-hb-stD">
                                                 <rect key="frame" x="8" y="26" width="304" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -450,10 +456,17 @@
                                                 <state key="normal" title="Add to Cart">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="addToCart:" destination="VC9-AI-Reb" eventType="touchUpInside" id="aJ5-6I-ewh"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgL-yC-mIx">
                                                 <rect key="frame" x="137" y="-3" width="46" height="46"/>
                                                 <state key="normal" image="AddTofavorites"/>
+                                                <state key="selected" image="AddedTofavorites"/>
+                                                <connections>
+                                                    <action selector="addToFavorites:" destination="VC9-AI-Reb" eventType="touchUpInside" id="Ntv-Wz-21f"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -577,7 +590,8 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="btnAddToFavorite" destination="KgL-yC-mIx" id="ncm-RY-eC9"/>
+                        <outlet property="btnCart" destination="aLg-1o-eqt" id="gQE-cr-aKT"/>
+                        <outlet property="btnFavorites" destination="KgL-yC-mIx" id="Z3L-Am-v7F"/>
                         <outlet property="ivProductImage" destination="lTn-E8-eeB" id="phT-Mr-EKO"/>
                         <outlet property="lblName" destination="2tN-ZV-xB4" id="vrx-n1-uJz"/>
                         <outlet property="lblProductPrice" destination="C0Z-hb-stD" id="qyg-Xl-lpN"/>
@@ -608,6 +622,9 @@
     <resources>
         <image name="ActiveFavorite" width="14" height="13"/>
         <image name="AddTofavorites" width="46" height="46"/>
+        <image name="AddedTofavorites" width="46" height="46"/>
+        <image name="Cart" width="27" height="23"/>
+        <image name="DeactiveFavorite" width="14" height="13"/>
         <image name="DeactiveList" width="26" height="22"/>
         <image name="Logo" width="176" height="176"/>
         <image name="Selected" width="39" height="30"/>

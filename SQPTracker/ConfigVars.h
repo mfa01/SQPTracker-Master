@@ -17,7 +17,8 @@
 #define Client_Secret @"NefvZpEDhwmigyQgqqYE"
 
 
-
+#define WEB_OFFERS @"offers"
+#define WEB_CARTS @"carts"
 #define WEB_MAIN_URL @"https://api.souq.com"
 #define WEB_Version @"v1"
 #define WEB_AuthScope @"OAuth2.0,cart_management,customer_profile"
@@ -30,4 +31,5 @@
 
 #define Keys_UserID @"UserID"
 #define Keys_UserAccessToken @"AccessToken"
+#define Keys_UserCartID @"UserCartID"
 #define Color_SOUQ_BLUE [UIColor colorWithRed:0 green:122.f/255.f blue:255.f/255.f alpha:1]

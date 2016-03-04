@@ -16,5 +16,12 @@
 
 +(void)authorizeUser;
 +(void)getAccesTokenWithCode:(NSString*)code AndCompletionHandler:(void (^)(id user))completionHandler FaildCompletionHandler:(void (^)(NSString* error))faildCompletionHandler;
++(NSString*)getUserAccessToken;
++(NSString*)getUserID;
++ (NSDictionary *)parseQueryString:(NSString *)query;
 
+
++(void)getUserCartWithCompletionHandler:(void (^)(id cart))completionHandler FaildCompletionHandler:(void (^)(NSString*error))faildCompletionHandler;
++(void)addProductToUserCartId:(NSString*)cartId AndProductId:(NSString*)productId AndCompletionHandler:(void (^)(bool success))completionHandler FaildCompletionHandler:(void (^)(NSString*error))faildCompletionHandler;
++(NSString*)getCartID;
 @end

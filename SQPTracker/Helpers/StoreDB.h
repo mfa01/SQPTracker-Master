@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <EGODatabase/EGODatabase.h>
+#import "ProductModel.h"
 
 @interface StoreDB : NSObject
 +(NSMutableArray*)getUserChoices;
 +(void)saveUserChoices:(NSMutableArray*)selectedProductsIDs;
 
-+(void)saveUserFavorites:(NSMutableArray*)selectedProductsIDs;
++(void)addToFavorites:(ProductModel*)item;
 +(NSMutableArray*)getUserFavorites;
++(void)removeFromFavorites:(ProductModel*)item;
++(ProductModel*)getItemFromFavoritesWithID:(NSString*)itemID;
 @end

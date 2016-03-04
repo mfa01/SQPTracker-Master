@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ProductsController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate>
+#import "ProductCell.h"
+@interface ProductsController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate,ProductCellDelegate>
 {
     int page;
     NSMutableArray* products;
     int oldTabBarItem;
     BOOL searching;
+    bool isInCart;
+    BOOL isInFavorites;
     NSArray*searchingResults;
+    NSMutableArray* favoritesArray;
+    NSMutableArray* cartArray;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;

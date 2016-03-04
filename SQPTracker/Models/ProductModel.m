@@ -16,7 +16,8 @@
                                                        @"label":@"product_label",
                                                        @"images":@"product_images",
                                                        @"offer_price":@"product_offer_price",
-                                                       @"currency":@"product_currency"
+                                                       @"currency":@"product_currency",
+                                                       @"offer_id":@"product_offer_id"
                                                        }];
 }
 -(NSURL*)getImageForProductsDashboard
